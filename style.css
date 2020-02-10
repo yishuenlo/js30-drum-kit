@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,600&display=swap');
+
+:root {
+    --background: #ECF0F3;
+    --text: rgb(171, 180, 190);
+    --highlight: #ffffff;
+    --shadow: #D1D9E6;
+}
+
+body{
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--text);
+    background-color: var(--background);
+    text-align: center;
+}
+
+main{
+    width: 80%;
+    margin: 30vh auto;
+}
+
+h1{
+    font-weight: 100;
+    margin-bottom: 4em;
+}
+
+section{
+    /* display: flex;
+    flex-direction: row; */
+    margin: auto;
+}
+
+.drum{
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--background);
+    box-shadow: 18px 18px 30px var(--shadow),
+                -18px -18px 30px var(--highlight);
+    margin-right: 3em;
+    transition: all 100ms ease;
+}
+
+.play{
+box-shadow: inset 35px 35px 100px #41bac8,
+inset -35px -35px 100px #59ffff;
+    color: white;
+}
+
+/* .line{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid var(--shadow);
+} */
+
+.drum h2{
+    font-size: 2em;
+    font-weight: 600;
+    position: relative;
+    top: -10px;
+}
+
+.drum span{
+    text-align: center;
+    position: relative;
+    top: -37px;
+}
+
+.credit{
+    position: relative;
+    bottom: 6vh;
+}
+
+a{  
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
