@@ -39,6 +39,7 @@ let colors = [{
 // console.log(randomizer);
 
 function playSound(event) {
+    console.log(event);
     //assign to audio based on which key is pressed
     const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`)
 
@@ -63,8 +64,8 @@ function playSound(event) {
     let randomizer = Math.floor(Math.random() * colors.length);
 
     key.style.boxShadow = `
-        inset 20px 20px 50px ${colors[randomizer].shadow}, 
-        inset -20px -20px 50px ${colors[randomizer].highlight}`;
+        inset 20px 20px 60px ${colors[randomizer].shadow}, 
+        inset -20px -20px 60px ${colors[randomizer].highlight}`;
 
 }
 
@@ -75,8 +76,26 @@ function removeColor(e) {
 }
 
 //apply event listener for each drum
-const drums = Array.from(document.querySelectorAll('.drum'));
+const drums = document.querySelectorAll('.drum');
 
 drums.forEach(drum => drum.addEventListener('transitionend', removeColor));
+
+drums.forEach(drum => drum.addEventListener('mousedown', function(e){
+    //after mouse click, identify which item is being click
+    //find its keyCode
+    const keyCode = this.attributes[0].value;
+
+    //align keyCode with audio, play audio
+    const audio = document.querySelector(`audio[data-key="${keyCode}"]`)
+    audio.currentTime = 0;
+    audio.play();
+
+    this.classList.add('play');
+    let randomizer = Math.floor(Math.random() * colors.length);
+
+    this.style.boxShadow = `
+    inset 20px 20px 60px ${colors[randomizer].shadow}, 
+    inset -20px -20px 60px ${colors[randomizer].highlight}`;
+}));
 
 window.addEventListener('keydown', playSound);
