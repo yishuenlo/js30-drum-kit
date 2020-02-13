@@ -38,7 +38,7 @@ let colors = [{
 // let randomizer = Math.floor(Math.random() * 4);
 // console.log(randomizer);
 
-function playSound() {
+function keyPlaySound() {
     // console.log(event); //refers to key press
     // console.log(this); //refers to window parent
     //assign to audio based on which key is pressed
@@ -48,12 +48,23 @@ function playSound() {
 
     //find key based on key pressed
     const key = document.querySelector(`div[data-key="${event.keyCode}"]`);
-
     //assign play styling to key
     key.classList.add('play');
 
     randomColors(key);
 };
+
+function mousePlaySound() {
+    //after mouse click, identify which item is being click
+    //find its data-key and assign to keyCode
+    const keyCode = this.getAttribute('data-key');
+
+    playAudio(keyCode);
+
+    this.classList.add('play');
+
+    randomColors(this);
+}
 
 function randomColors(key) {
     let randomizer = Math.floor(Math.random() * colors.length);
@@ -81,20 +92,7 @@ function removeColor(e) {
 
 //apply event listener for each drum
 const drums = document.querySelectorAll('.drum');
-
 drums.forEach(drum => drum.addEventListener('transitionend', removeColor));
 
-drums.forEach(drum => drum.addEventListener('mousedown', function(e){
-    console.log(e);
-    //after mouse click, identify which item is being click
-    //find its data-key and assign to keyCode
-    const keyCode = this.getAttribute('data-key');
-
-    playAudio(keyCode);
-
-    this.classList.add('play');
-
-    randomColors(this);
-}));
-
-window.addEventListener('keydown', playSound);
+drums.forEach(drum => drum.addEventListener('mousedown', mousePlaySound));
+window.addEventListener('keydown', keyPlaySound);
