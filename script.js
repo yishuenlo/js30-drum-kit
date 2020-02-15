@@ -39,8 +39,6 @@ let colors = [{
 // console.log(randomizer);
 
 function keyPlaySound() {
-    // console.log(event); //refers to key press
-    // console.log(this); //refers to window parent
     //assign to audio based on which key is pressed
     let keyCode = event.keyCode;
     
@@ -66,14 +64,6 @@ function mousePlaySound() {
     randomColors(this);
 }
 
-function randomColors(key) {
-    let randomizer = Math.floor(Math.random() * colors.length);
-
-    key.style.boxShadow = `
-        inset 20px 20px 60px ${colors[randomizer].shadow}, 
-        inset -20px -20px 60px ${colors[randomizer].highlight}`;
-};
-
 function playAudio(keyCode) {
     //align keyCode with audio, play audio
     const audio = document.querySelector(`audio[data-key="${keyCode}"]`)
@@ -83,16 +73,23 @@ function playAudio(keyCode) {
     audio.play();
 }
 
+function randomColors(key) {
+    let randomizer = Math.floor(Math.random() * colors.length);
+
+    key.style.boxShadow = `
+        inset 20px 20px 60px ${colors[randomizer].shadow}, 
+        inset -20px -20px 60px ${colors[randomizer].highlight}`;
+};
+
 function removeColor(e) {
     if (e.propertyName !== 'color') return;
     e.target.style.boxShadow = "18px 18px 30px #D1D9E6, -18px -18px 30px #fff";
     e.target.classList.remove('play');
 };
 
+drums.forEach(drum => drum.addEventListener('mousedown', mousePlaySound));
+window.addEventListener('keydown', keyPlaySound);
 
 //apply event listener for each drum
 const drums = document.querySelectorAll('.drum');
 drums.forEach(drum => drum.addEventListener('transitionend', removeColor));
-
-drums.forEach(drum => drum.addEventListener('mousedown', mousePlaySound));
-window.addEventListener('keydown', keyPlaySound);
